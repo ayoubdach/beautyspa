@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Anais Promo 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6f0;
+    --gold: #c8a96e;
+    --gold-light: #e4c98a;
+    --gold-pale: #f5e9d0;
+    --green: #1a3328;
+    --green-mid: #254d3a;
+    --green-light: #2e6b4f;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    width:1080px; height:1920px;
+    font-family:'Jost',sans-serif;
+    overflow:hidden; position:relative;
+    background: var(--cream);
+  }
+
+  /* Full page bg variant - cream with side panel */
+  .sidebar {
+    position:absolute; top:0; right:0; bottom:0; width:340px;
+    background: linear-gradient(180deg, var(--green) 0%, var(--green-mid) 100%);
+  }
+  .sidebar::before {
+    content:'';
+    position:absolute; top:0; left:-80px; bottom:0; width:160px;
+    background: var(--cream);
+    clip-path: polygon(80px 0, 100% 0, 100% 100%, 80px 100%, 0 50%);
+  }
+
+  /* Decorative circles on sidebar */
+  .side-circle {
+    position:absolute; border-radius:50%;
+    border:1px solid rgba(200,169,110,0.15);
+  }
+
+  /* Gold corner accent */
+  .corner-tl { position:absolute; top:36px; left:36px; width:60px; height:60px; border-top:2px solid var(--gold); border-left:2px solid var(--gold); }
+  .corner-br { position:absolute; bottom:36px; right:36px; width:60px; height:60px; border-bottom:2px solid var(--gold); border-right:2px solid var(--gold); opacity:0.5; }
+
+  .content {
+    position:relative; z-index:10;
+    height:100%;
+    display:flex; flex-direction:column;
+    padding:70px 72px 64px;
+  }
+
+  /* HEADER */
+  .header { margin-bottom:48px; }
+
+  .header-row {
+    display:flex; justify-content:space-between; align-items:flex-start;
+  }
+
+  .brand-block {}
+  .brand-name {
+    font-family:'Playfair Display',serif;
+    font-size:82px; font-weight:900;
+    letter-spacing:12px; color:var(--green);
+    text-transform:uppercase; line-height:0.9;
+  }
+  .brand-sub {
+    font-size:11px; font-weight:300; letter-spacing:9px;
+    color:rgba(26,51,40,0.45); text-transform:uppercase;
+    margin-top:8px;
+  }
+
+  .badge-stack { display:flex; flex-direction:column; align-items:flex-end; gap:8px; margin-top:6px; }
+  .badge {
+    background:linear-gradient(135deg, var(--gold), var(--gold-light));
+    color:var(--green); font-size:9px; font-weight:600;
+    letter-spacing:5px; text-transform:uppercase;
+    padding:7px 20px; border-radius:2px;
+    box-shadow:0 4px 16px rgba(200,169,110,0.35);
+  }
+
+  .header-divider {
+    margin-top:32px;
+    display:flex; align-items:center; gap:16px;
+  }
+  .hdiv-line { flex:1; height:1px; background:linear-gradient(90deg, var(--gold), rgba(200,169,110,0.15)); }
+  .hdiv-dot { width:6px; height:6px; background:var(--gold); transform:rotate(45deg); }
+  .hdiv-text { font-size:10px; letter-spacing:6px; color:var(--gold); text-transform:uppercase; white-space:nowrap; }
+
+  /* PACKAGES */
+  .packages { display:flex; flex-direction:column; gap:36px; flex:1; }
+
+  .pkg {
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow: 0 12px 50px rgba(26,51,40,0.1), 0 2px 10px rgba(26,51,40,0.05);
+    position:relative;
+  }
+
+  /* Top gradient bar */
+  .pkg-bar {
+    height:6px;
+    background:linear-gradient(90deg, var(--green), var(--green-light), var(--gold), var(--green-light), var(--green));
+  }
+
+  .pkg-inner { padding:36px 44px 34px; }
+
+  .pkg-header {
+    display:flex; justify-content:space-between; align-items:flex-start;
+    margin-bottom:20px;
+  }
+
+  .pkg-num {
+    font-size:9px; letter-spacing:6px; color:var(--gold);
+    text-transform:uppercase; font-weight:500; margin-bottom:6px;
+  }
+
+  .pkg-name {
+    font-family:'Playfair Display',serif;
+    font-size:52px; font-weight:700; color:var(--green);
+    line-height:1;
+  }
+
+  .price-block { text-align:right; }
+  .price-tag {
+    font-family:'Playfair Display',serif;
+    font-size:72px; font-weight:700;
+    color:var(--green-light); line-height:1;
+  }
+  .price-tag sup { font-size:22px; font-weight:400; vertical-align:super; color:var(--gold); }
+
+  .pkg-sep {
+    height:1px; margin-bottom:20px;
+    background:linear-gradient(90deg, rgba(200,169,110,0.4), rgba(200,169,110,0.1), transparent);
+  }
+
+  .services { display:flex; flex-direction:column; gap:14px; }
+
+  .svc {
+    display:flex; align-items:center; gap:14px;
+    font-size:17px; font-weight:400; color:#2e4038;
+  }
+  .svc-icon {
+    width:32px; height:32px; border-radius:50%; flex-shrink:0;
+    background:var(--gold-pale);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; color:var(--gold);
+  }
+
+  .or-row {
+    display:flex; align-items:center; gap:16px; padding:4px 0;
+  }
+  .or-line { flex:1; height:1px; background:rgba(200,169,110,0.3); }
+  .or-text { font-size:11px; letter-spacing:5px; color:rgba(200,169,110,0.7); text-transform:uppercase; }
+
+  .pkg-note {
+    margin-top:16px; padding:12px 18px;
+    background:rgba(200,169,110,0.08);
+    border-left:2px solid var(--gold);
+    border-radius:0 8px 8px 0;
+    font-size:13px; color:rgba(26,51,40,0.65); font-style:italic;
+  }
+
+  /* FOOTER */
+  .footer { margin-top:36px; }
+  .contact-bar {
+    background:linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+    border-radius:18px;
+    padding:32px 52px;
+    display:flex; justify-content:space-between; align-items:center;
+    box-shadow:0 14px 44px rgba(26,51,40,0.28);
+    position:relative; overflow:hidden;
+  }
+  .contact-bar::before {
+    content:'';
+    position:absolute; top:-60px; right:-60px;
+    width:220px; height:220px;
+    border:1px solid rgba(200,169,110,0.1); border-radius:50%;
+  }
+  .contact-bar::after {
+    content:'';
+    position:absolute; top:-30px; right:-30px;
+    width:140px; height:140px;
+    border:1px solid rgba(200,169,110,0.08); border-radius:50%;
+  }
+  .clbl { font-size:10px; letter-spacing:7px; color:rgba(250,246,240,0.5); text-transform:uppercase; margin-bottom:5px; }
+  .cnum {
+    font-family:'Playfair Display',serif;
+    font-size:48px; font-weight:400; color:var(--cream); letter-spacing:4px;
+  }
+  .brand-right {
+    text-align:right;
+    position:relative; z-index:1;
+  }
+  .brand-right .name {
+    font-family:'Playfair Display',serif;
+    font-size:32px; font-weight:700; color:var(--gold-light); letter-spacing:6px; text-transform:uppercase;
+  }
+  .brand-right .sub { font-size:10px; letter-spacing:6px; color:rgba(250,246,240,0.45); text-transform:uppercase; }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="side-circle" style="width:400px;height:400px;top:-100px;right:-100px;"></div>
+  <div class="side-circle" style="width:250px;height:250px;bottom:200px;right:20px;"></div>
+</div>
+<div class="corner-tl"></div>
+<div class="corner-br"></div>
+
+<div class="content">
+
+  <div class="header">
+    <div class="header-row">
+      <div class="brand-block">
+        <div class="brand-name">Anais</div>
+        <div class="brand-sub">Beauty &amp; Spa</div>
+      </div>
+      <div class="badge-stack">
+        <div class="badge">✦ Offre Spéciale</div>
+        <div class="badge">Forfaits Premium</div>
+      </div>
+    </div>
+    <div class="header-divider">
+      <div class="hdiv-line"></div>
+      <div class="hdiv-dot"></div>
+      <div class="hdiv-text">Nos Soins Signature</div>
+      <div class="hdiv-dot"></div>
+    </div>
+  </div>
+
+  <div class="packages">
+
+    <!-- Luxe Maman -->
+    <div class="pkg">
+      <div class="pkg-bar"></div>
+      <div class="pkg-inner">
+        <div class="pkg-header">
+          <div>
+            <div class="pkg-num">Forfait 04 — Premium</div>
+            <div class="pkg-name">Luxe Maman</div>
+          </div>
+          <div class="price-block">
+            <div class="price-tag">150<sup>DT</sup></div>
+          </div>
+        </div>
+        <div class="pkg-sep"></div>
+        <div class="services">
+          <div class="svc"><div class="svc-icon">♨</div>Hammam Traditionnel</div>
+          <div class="svc"><div class="svc-icon">✦</div>Soin Hydrafacial</div>
+          <div class="svc"><div class="svc-icon">◎</div>Massage Kobido</div>
+          <div class="or-row"><div class="or-line"></div><div class="or-text">ou</div><div class="or-line"></div></div>
+          <div class="svc"><div class="svc-icon">◎</div>Massage Jambes Lourdes</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duo -->
+    <div class="pkg">
+      <div class="pkg-bar"></div>
+      <div class="pkg-inner">
+        <div class="pkg-header">
+          <div>
+            <div class="pkg-num">Forfait 05 — Duo</div>
+            <div class="pkg-name">Duo Beauté</div>
+          </div>
+          <div class="price-block">
+            <div class="price-tag">160<sup>DT</sup></div>
+          </div>
+        </div>
+        <div class="pkg-sep"></div>
+        <div class="services">
+          <div class="svc"><div class="svc-icon">♨</div>Hammam &amp; Gommage à deux</div>
+          <div class="svc"><div class="svc-icon">◎</div>Massage Relaxant 30 min en Duo</div>
+          <div class="svc"><div class="svc-icon">✿</div>2× Brushings</div>
+        </div>
+        <div class="pkg-note">Partagez un moment de bien-être inoubliable à deux ✦</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="contact-bar">
+      <div>
+        <div class="clbl">Réservation</div>
+        <div class="cnum">23 212 515</div>
+      </div>
+      <div class="brand-right">
+        <div class="name">Anais</div>
+        <div class="sub">Beauty &amp; Spa</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
